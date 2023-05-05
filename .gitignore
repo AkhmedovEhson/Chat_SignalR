@@ -1,1 +1,3 @@
 /.vs
+./ChatService/bin
+./ChatService/obj
