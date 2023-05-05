@@ -1,0 +1,4 @@
+﻿namespace ChatService.Domain.Common
+{
+   
+}
