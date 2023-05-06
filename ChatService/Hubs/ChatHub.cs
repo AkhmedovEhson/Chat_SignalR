@@ -1,5 +1,6 @@
 ﻿using ChatService.Domain.Common;
 using ChatService.Domain.Models;
+using ChatService.Persistence;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChatService.Hubs
@@ -8,14 +9,24 @@ namespace ChatService.Hubs
     {
         public string botUser;
         private static IDictionary<string, UserConnection> connections;
-        public ChatHub(IDictionary<string,UserConnection> _connections) 
+        private readonly ApplicationDbContext context;
+        public ChatHub(IDictionary<string,UserConnection> _connections,
+            ApplicationDbContext _context) 
         {
             botUser = "Bot";
             connections = _connections;
-            
+            context = _context;
         }
         public async Task JoinRoom(UserConnection userConnection)
         {
+
+            var room = context.Rooms.FirstOrDefault(o => o.Name == userConnection.Room);
+            if (room == null)
+            {
+                throw new Exception("Room not found!");
+            }
+
+
             KeyValuePair<string, UserConnection> keyPair 
                     = new KeyValuePair<string, UserConnection>(userConnection.User, userConnection);
 
