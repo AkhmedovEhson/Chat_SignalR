@@ -1,0 +1,19 @@
+﻿
+            /*await Clients.Group(room).SendAsync(HubMethods.RECEIVEMESSAGEMETHOD,
+                userConnection.User.Username);*/
+
+
+            /*KeyValuePair<string, UserConnection> keyPair 
+                    = new KeyValuePair<string, UserConnection>(userConnection.User, userConnection);
+
+            if (connections.ContainsKey(keyPair.Key))
+            {
+                Console.WriteLine("Already joined!");
+                return;
+            }
+            
+            await Groups.AddToGroupAsync(userConnection.User, userConnection.Room);
+            connections.Add(userConnection.User,userConnection);
+            //Sends notification about who joined the room.
+            await Clients.Group(userConnection.Room).SendAsync(HubMethods.RECEIVEMESSAGEMETHOD,
+                botUser, $"{userConnection.User} joined to {userConnection.Room}");*/
