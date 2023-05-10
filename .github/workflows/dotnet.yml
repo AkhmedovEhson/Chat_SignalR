@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Printer
-      run: |
+      run: 
        echo "INFO logged"
   
 	
