@@ -2,8 +2,8 @@
 {
     public class HubMethods
     {
-        public static string JOINMETHOD = nameof(JOINMETHOD);
-        public static string SENDMESSAGEMETHOD = nameof(SENDMESSAGEMETHOD);
-        public static string RECEIVEMESSAGEMETHOD = nameof(RECEIVEMESSAGEMETHOD);
+        public static string Join = nameof(Join);
+        public static string SendMessage = nameof(SendMessage);
+        public static string ReceiveMessage = nameof(ReceiveMessage);
     }
 }
