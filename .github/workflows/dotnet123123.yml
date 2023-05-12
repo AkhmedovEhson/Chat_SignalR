@@ -15,5 +15,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Printer
+    - name: ConnectSolution
+      run: dotnet msbuild ".../ChatService/ChatService.csproj"
+    - name: build
       run: dotnet build
