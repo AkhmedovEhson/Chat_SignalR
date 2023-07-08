@@ -12,4 +12,4 @@
 * Online Games
 
 ## Get Started 🏁
-💻 Enter `docker-compose up`.## THAT IS IT.
+💻 Enter `docker-compose up`.
