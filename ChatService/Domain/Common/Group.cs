@@ -1,5 +1,8 @@
 ﻿namespace ChatService.Domain.Common
 {
-    class Settings { }
+    class Settings
+    {
+        public Settings() { }
+    }
 
 }
