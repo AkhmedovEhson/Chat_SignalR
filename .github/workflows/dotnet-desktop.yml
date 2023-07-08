@@ -19,8 +19,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Catch exceptions
-      run: dotnet build
-    - name: GitEmojies
+      run: dotnet build ??
+    - name: GitEmojies ?
       run: echo ":heart:"
         
     - name: Restore dependencies
