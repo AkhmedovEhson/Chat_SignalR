@@ -26,6 +26,4 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Build Docker Container
-      run: docker-compose up -d --build chatservice
 
