@@ -29,6 +29,12 @@ namespace ChatService.Hubs
             // Disconnects
             var user = context.Users.FirstOrDefault(u => u.Id == userConnection.UserId);
             await Groups.RemoveFromGroupAsync(user.Username,userConnection.RoomId.ToString());
+
+            // test perpose ..
+            foreach(var connection in connections)
+            {
+                Console.WriteLine(connection.ToString());
+            }
         }
 
 
