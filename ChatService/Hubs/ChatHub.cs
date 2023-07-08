@@ -26,6 +26,7 @@ namespace ChatService.Hubs
         //Disconnect from chat - room
         public async Task DisconnectRoom(UserConnection userConnection)
         {
+            // Disconnects
             var user = context.Users.FirstOrDefault(u => u.Id == userConnection.UserId);
             await Groups.RemoveFromGroupAsync(user.Username,userConnection.RoomId.ToString());
         }
