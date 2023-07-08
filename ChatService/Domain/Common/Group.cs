@@ -3,7 +3,7 @@
     class Settings
     {
         public Settings() { }
-        public Settings(int id) { }
+     
     }
 
 }
