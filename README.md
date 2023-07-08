@@ -1,7 +1,7 @@
 ## Chat_SignalR 📱
-*🚑 Chat Application ( SignalR ) - Is an application developed on clean architecture , and it is chat-app.📄
-*😃 Each can talk with friends and have ability to have any type calls ☎️. Application is on 🧑‍💻 testing.
-*🐱 Application is absolutely free 💸
+🚑 * Chat Application ( SignalR ) - Is an application developed on clean architecture , and it is chat-app.📄
+😃 * Each can talk with friends and have ability to have any type calls ☎️. Application is on 🧑‍💻 testing.
+🐱 * Application is absolutely free 💸
 
 ## Performance 📰
 * WebSocket and SignalR WORKS more FAST than ` 30 ms ` per request 🐟
