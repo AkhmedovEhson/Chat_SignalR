@@ -7,7 +7,7 @@
 * WebSocket and SignalR WORKS more FAST than ` 30 ms ` per request 🐟
 
 ## Technologies 💻📁
-* 🚑 .NET 6
+* ⌨️ .NET 6
 * 😸 ASP.NET 6
 * 📦️ SIGNAL(R) 
 * 📸 OUT OF ( if-else ) ` GUARD `
