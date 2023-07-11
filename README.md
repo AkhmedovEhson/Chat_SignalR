@@ -16,9 +16,9 @@
 
 
 ## Key Features 🚀
-* Authorization and Authentication 🔒: Secure your application using JWT for authentication and authorization. Ensure that only authorized users can access the application's features and data.
-* Online Talks
-* Online Games
+* 🔒 Authorization and Authentication: Secure your application using JWT for authentication and authorization. Ensure that only authorized users can access the application's features and data.
+* 🍕 Online Talks
+* 🎮 Online Games
 
 
 ## Get Started 🏁
