@@ -8,14 +8,13 @@ namespace ChatService.Persistence
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\Local;Database=ShopCleanDb");
+                optionsBuilder.UseSqlServer("Server=localhost;Port=5434;Userid=postgres;Password=postgres;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SslMode=Disable;Database=chat;");
 
             }
             base.OnConfiguring(optionsBuilder);
