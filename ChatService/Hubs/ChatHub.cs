@@ -1,7 +1,10 @@
 ﻿using ChatService.Domain.Common;
 using ChatService.Domain.Entities;
 using ChatService.Domain.Models;
+using ChatService.MediatR;
+using ChatService.MediatR.Chat.Commands;
 using ChatService.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using Serilog;
 
@@ -11,12 +14,15 @@ namespace ChatService.Hubs
     {
 
         private static IDictionary<string,string> connections;
+        private readonly ISender _sender;
 
 
-        public ChatHub(IDictionary<string,string> _connections) 
+
+        public ChatHub(IDictionary<string,string> _connections,ISender sender) 
         {
             
             connections = _connections;
+            _sender = sender;
         }
 
 
@@ -27,36 +33,23 @@ namespace ChatService.Hubs
 
 
 
-        public async Task ConnectToRoom(UserConnection userConnection)
+        public async Task ConnectToRoom(UserConnection connection)
         {
-           
-            var room = userConnection.RoomId.ToString();
-
-
-            if (room is null)
-                throw new Exception("Room not found");
-
-            
-
-            // Add to group.
-            await Groups.AddToGroupAsync(Context.ConnectionId,
-                                         room);
-
-
-            Log.Information("Connected.");
-            if (!connections.ContainsKey(Context.ConnectionId))
+            var command = new ChatHubCommand(Context)
             {
-                connections.Add(Context.ConnectionId,
-                                room.ToString());
+                UserId = connection.UserId,
+                RoomId = connection.RoomId,
+            };
 
-                await Clients.Group(room.ToString())
-                            .SendAsync(HubMethods.ReceiveMessage, $"Someone with ID '{Context.ConnectionId}' has connected");
-                Log.Information("Added to connections list");
-            }
-                
-            
-           
+
+            await _sender.Send(command);
+     
         }
+
+
+
+
+        // NOTE: REFACTOR !
         public async Task DisconnectRoom(UserConnection userConnection)
         {
             // Disconnects

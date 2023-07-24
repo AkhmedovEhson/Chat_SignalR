@@ -1,15 +1,20 @@
+using ChatService.Common.Interfaces;
 using ChatService.Domain.Entities;
 using ChatService.Domain.Models;
 using ChatService.Filters;
 using ChatService.Hubs;
 using ChatService.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
+builder.Services.AddMediatR(cfg => cfg
+            .RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
