@@ -8,6 +8,7 @@ namespace ChatService.Persistence
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
