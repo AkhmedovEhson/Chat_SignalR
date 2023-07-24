@@ -4,6 +4,8 @@ using ChatService.Domain.Models;
 using ChatService.Filters;
 using ChatService.Hubs;
 using ChatService.Persistence;
+using Domain;
+using Domain.Common.Dispatcher;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;

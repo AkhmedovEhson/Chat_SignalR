@@ -1,6 +1,7 @@
-﻿namespace ChatService.Domain.Entities
+﻿using ChatService.Domain.Common;
+namespace ChatService.Domain.Entities
 {
-    public class User
+    public class User:BaseEntity
     {
         public int Id { get; set; } 
         public string Username { get; set; }

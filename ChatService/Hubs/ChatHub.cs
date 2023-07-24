@@ -4,6 +4,8 @@ using ChatService.Domain.Models;
 using ChatService.MediatR;
 using ChatService.MediatR.Chat.Commands;
 using ChatService.Persistence;
+using Domain;
+using Domain.Common.Dispatcher;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using Serilog;
@@ -23,13 +25,13 @@ namespace ChatService.Hubs
             
             connections = _connections;
             _sender = sender;
+
+
+
+
+
+
         }
-
-
-
-
-
-
 
 
 
