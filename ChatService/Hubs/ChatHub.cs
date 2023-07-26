@@ -20,6 +20,8 @@ namespace ChatService.Hubs
         public ChatHub(ISender sender) 
         {   
             _sender = sender;
+
+
         }
 
         public async Task ConnectToRoom(UserConnection connection)
@@ -30,7 +32,11 @@ namespace ChatService.Hubs
                 Connection = connection
             };
 
-            await _sender.Send(command);     
+
+
+            await _sender.Send(command);
+          
+     
         }
 
         public async Task DisconnectRoom(UserConnection userConnection)
@@ -41,6 +47,7 @@ namespace ChatService.Hubs
             {
                 Connection = userConnection,
             };
+
             await _sender.Send(command);
         }
 
@@ -49,13 +56,14 @@ namespace ChatService.Hubs
         public async Task SendMessageRequest(UserConnection userConnection,string message)
         {
             var context = new Context(Context,this);
+
             var command = new SendCommand(context)
             {
                 Connection = userConnection,
                 Message    = message
             };
 
-            await _sender.Send(command);
+            await _sender.Send(command);    
             
         }
     }
