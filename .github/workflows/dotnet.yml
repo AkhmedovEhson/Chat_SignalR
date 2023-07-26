@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Catch exceptions
-      run: dotnet build
+      run: dotnet build ChatService.sln
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
