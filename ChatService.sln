@@ -8,7 +8,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatService", "ChatService\
 		{D87C574B-5796-4845-9A7C-66BD04A77749} = {D87C574B-5796-4845-9A7C-66BD04A77749}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{D87C574B-5796-4845-9A7C-66BD04A77749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{D87C574B-5796-4845-9A7C-66BD04A77749}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{20C56FF4-2A96-4EC5-B4C1-96D5690715E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{B4C215A2-42F3-45B4-8115-CC4401047033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +28,14 @@ Global
 		{D87C574B-5796-4845-9A7C-66BD04A77749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D87C574B-5796-4845-9A7C-66BD04A77749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D87C574B-5796-4845-9A7C-66BD04A77749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20C56FF4-2A96-4EC5-B4C1-96D5690715E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C56FF4-2A96-4EC5-B4C1-96D5690715E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C56FF4-2A96-4EC5-B4C1-96D5690715E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C56FF4-2A96-4EC5-B4C1-96D5690715E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C215A2-42F3-45B4-8115-CC4401047033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C215A2-42F3-45B4-8115-CC4401047033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C215A2-42F3-45B4-8115-CC4401047033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C215A2-42F3-45B4-8115-CC4401047033}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
