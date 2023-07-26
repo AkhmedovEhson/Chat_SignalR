@@ -15,16 +15,14 @@ namespace ChatService.Hubs
 {
     public class ChatHub:Hub
     {
-
         private readonly ISender _sender;
 
         public ChatHub(ISender sender) 
-        {
-            
+        {   
             _sender = sender;
 
-        }
 
+        }
 
         public async Task ConnectToRoom(UserConnection connection)
         {
@@ -35,12 +33,11 @@ namespace ChatService.Hubs
             };
 
 
+
             await _sender.Send(command);
           
      
         }
-
-
 
         public async Task DisconnectRoom(UserConnection userConnection)
         {
