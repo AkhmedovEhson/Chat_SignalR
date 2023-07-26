@@ -22,7 +22,10 @@ jobs:
       run: dotnet build ChatService.sln
     - name: GitEmojies 📦
       run: echo "Git Emojie -> 📦"
-        
+    - name: Migration Files
+      run: |
+        cd ChatService
+        rm -rf Migrations
     - name: Restore dependencies
       run: dotnet restore ChatService.sln
     - name: Build
