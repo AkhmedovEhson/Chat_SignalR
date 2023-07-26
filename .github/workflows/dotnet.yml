@@ -23,7 +23,7 @@ jobs:
     - name: Catch exceptions
       run: dotnet build ChatService.sln
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ChatService.sln
     - name: Build
       run: dotnet build --no-restore
 
