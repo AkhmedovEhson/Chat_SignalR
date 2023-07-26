@@ -19,7 +19,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Catch exceptions 👽️
-      run: dotnet build
+      run: dotnet build ChatService.sln
     - name: GitEmojies 📦
       run: echo "Git Emojie -> 📦"
         
