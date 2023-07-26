@@ -26,7 +26,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ChatService.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ChatService.sln --no-restore 
 
 
 
