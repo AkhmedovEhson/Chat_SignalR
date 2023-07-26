@@ -1,10 +1,12 @@
 ﻿using ChatService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Application.Common.Interfaces;
+using System.Reflection;
 
 namespace ChatService.Persistence
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:DbContext,IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
@@ -15,14 +17,17 @@ namespace ChatService.Persistence
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost;Port=5434;Userid=postgres;Password=postgres;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SslMode=Disable;Database=chat;");
+                optionsBuilder.UseNpgsql("Server=localhost;Port=5434;Userid=postgres;Password=postgres;" +
+                    "Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SslMode=Disable;Database=chat;");
 
             }
+            optionsBuilder.EnableSensitiveDataLogging();
             base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
             base.OnModelCreating(modelBuilder);
         }
     }

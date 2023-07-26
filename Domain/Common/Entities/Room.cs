@@ -1,5 +1,6 @@
 ﻿using ChatService.Domain.Common;
 using Domain.Common;
+
 namespace ChatService.Domain.Entities
 {
     public class Room:BaseEntity

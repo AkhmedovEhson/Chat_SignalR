@@ -1,11 +1,13 @@
+using Application;
+using ChatService;
 using ChatService.Common.Interfaces;
 using ChatService.Domain.Entities;
 using ChatService.Domain.Models;
 using ChatService.Filters;
 using ChatService.Hubs;
-using ChatService.Persistence;
 using Domain;
 using Domain.Common.Dispatcher;
+using Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +17,9 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
-builder.Services.AddMediatR(cfg => cfg
-            .RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddUIServices();
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices();
 Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
@@ -34,10 +37,6 @@ builder.Services.AddCors(cors =>
     });
 });
 
-builder.Services.AddDbContext<ApplicationDbContext>(ops =>
-{
-    ops.UseSqlServer("Server=(localdb)\\Local;Database=ShopCleanDb");
-});
 
 builder.Services.AddSingleton<IDictionary<string, string>>(o => new Dictionary<string,string>());
 var app = builder.Build();

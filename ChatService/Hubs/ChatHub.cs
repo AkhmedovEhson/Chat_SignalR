@@ -1,9 +1,9 @@
-﻿using ChatService.Domain.Common;
+﻿using Application;
+using Application.Connect.Commands;
+using ChatService.Domain.Common;
 using ChatService.Domain.Entities;
 using ChatService.Domain.Models;
 using ChatService.MediatR;
-using ChatService.MediatR.Chat.Commands;
-using ChatService.Persistence;
 using Domain;
 using Domain.Common.Dispatcher;
 using MediatR;
@@ -37,7 +37,8 @@ namespace ChatService.Hubs
 
         public async Task ConnectToRoom(UserConnection connection)
         {
-            var command = new ChatHubCommand(Context)
+            var context = new Context(Context,this);
+            var command = new ChatHubCommand(context)
             {
                 UserId = connection.UserId,
                 RoomId = connection.RoomId,
@@ -64,17 +65,15 @@ namespace ChatService.Hubs
             }
             await Clients.All.SendAsync("Disconnected", $"Client with ID {userConnection.UserId} has disconnected ! ");
         }
+
+
+
         public async Task SendMessageRequest(UserConnection userConnection,string message)
         {
+            var command = new Command(this);
+            await _sender.Send(command);
 
-            string? roomId = userConnection.RoomId.ToString();
-
-
-            if (connections.TryGetValue(Context.ConnectionId, out var connection))
-            {
-                await Clients.Group(roomId).SendAsync(HubMethods.SendMessage, Context.ConnectionId, $" : {message}");
-
-            }
+            await Clients.Group(userConnection.RoomId.ToString()).SendAsync(HubMethods.ReceiveMessage,userConnection,message);
             
         }
     }
