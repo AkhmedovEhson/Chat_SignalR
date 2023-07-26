@@ -2,3 +2,10 @@ ChatService/bin/
 ChatService/obj
 /.ChatService.sln
 /.vs
+Domain/obj
+Domain/bin
+Infrastructure/obj
+Infrastructure/bin
+Application/obj
+Application/bin
+
