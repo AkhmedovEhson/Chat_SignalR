@@ -15,7 +15,7 @@ namespace Domain
         public Context(HubCallerContext hubCallerContext,Hub context)
         {
             HubCallerContext = hubCallerContext;
-            var q = context.Context;
+            IHubContext = context;
             
         }
 

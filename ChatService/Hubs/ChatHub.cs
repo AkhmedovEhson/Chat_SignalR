@@ -1,4 +1,5 @@
 ﻿using Application;
+using Application.Comunication;
 using Application.Connect.Commands;
 using ChatService.Domain.Common;
 using ChatService.Domain.Entities;
@@ -15,15 +16,13 @@ namespace ChatService.Hubs
     public class ChatHub:Hub
     {
 
-        private static IDictionary<string,string> connections;
         private readonly ISender _sender;
 
 
 
-        public ChatHub(IDictionary<string,string> _connections,ISender sender) 
+        public ChatHub(ISender sender) 
         {
             
-            connections = _connections;
             _sender = sender;
 
 
@@ -37,11 +36,10 @@ namespace ChatService.Hubs
 
         public async Task ConnectToRoom(UserConnection connection)
         {
-            var context = new Context(Context,this);
+            var context = new Context(this.Context,this);
             var command = new ChatHubCommand(context)
             {
-                UserId = connection.UserId,
-                RoomId = connection.RoomId,
+                Connection = connection
             };
 
 
@@ -52,28 +50,29 @@ namespace ChatService.Hubs
 
 
 
-        // NOTE: REFACTOR !
         public async Task DisconnectRoom(UserConnection userConnection)
         {
-            // Disconnects
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId,userConnection.RoomId.ToString());
+            var context = new Context(this.Context, this);
 
-            // test perpose ..
-            foreach(var connection in connections)
+            var command = new DisconnectCommand(context)
             {
-                Console.WriteLine(connection.ToString());
-            }
-            await Clients.All.SendAsync("Disconnected", $"Client with ID {userConnection.UserId} has disconnected ! ");
+                Connection = userConnection,
+            };
+            await _sender.Send(command);
         }
 
 
 
         public async Task SendMessageRequest(UserConnection userConnection,string message)
         {
-            var command = new Command(this);
-            await _sender.Send(command);
+            var context = new Context(Context,this);
+            var command = new SendCommand(context)
+            {
+                Connection = userConnection,
+                Message    = message
+            };
 
-            await Clients.Group(userConnection.RoomId.ToString()).SendAsync(HubMethods.ReceiveMessage,userConnection,message);
+            await _sender.Send(command);
             
         }
     }

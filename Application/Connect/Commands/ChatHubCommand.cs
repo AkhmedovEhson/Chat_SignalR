@@ -6,18 +6,18 @@ using ChatService.MediatR.Chat.Notifications;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Application.Common.Interfaces;
+using ChatService.Domain.Models;
 
 namespace Application.Connect.Commands
 {
     public class ChatHubCommand : IRequest
     {
-        public int UserId { get; set; }
-        public int RoomId { get; set; }
 
+        public UserConnection? Connection { get; set; }
         public ChatHubCommand(Context hubContext)
             => HubContext = hubContext;
 
-        public Context HubContext { get; set; }
+        internal Context HubContext { get; set; }
     }
 
 
@@ -34,12 +34,14 @@ namespace Application.Connect.Commands
             _dbContext = dbContext;
 
         }
-        public async Task Handle(ChatHubCommand userConnection, CancellationToken cancellationToken)
+        public async Task Handle(ChatHubCommand command, CancellationToken cancellationToken)
         {
 
+            if (command.Connection is null)
+                throw new Exception("User send empty connection");
             var room = _dbContext.Rooms
                     .Include(x => x.Listeners)
-                    .Where(x => x.Id == userConnection.RoomId)
+                    .Where(x => x.Id == command.Connection.RoomId)
                     .FirstOrDefault()
                     ?? throw new Exception("Room does not exist !");
 
@@ -48,7 +50,7 @@ namespace Application.Connect.Commands
 
             var user = await _dbContext.Users
                 .Include(x => x.Rooms)
-                .Where(user => user.Id == userConnection.UserId)
+                .Where(user => user.Id == command.Connection.UserId)
                 .FirstOrDefaultAsync()
                 ?? throw new Exception("User not found");
 
@@ -60,11 +62,11 @@ namespace Application.Connect.Commands
 
 
             // Add to group.
-            await userConnection.HubContext.IHubContext.Groups.AddToGroupAsync(userConnection.HubContext.HubCallerContext.ConnectionId,
+            await command.HubContext.IHubContext.Groups.AddToGroupAsync(command.HubContext.HubCallerContext.ConnectionId,
                                          room.Id.ToString());
 
 
-            var Event = new ChatHubConnectedEvent(userConnection.HubContext.IHubContext)
+            var Event = new ChatHubConnectedEvent(command.HubContext.IHubContext)
             {
                 user = user,
                 room = room,
