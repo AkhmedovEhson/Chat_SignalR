@@ -3,7 +3,7 @@ using ChatService.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection.Metadata.Ecma335;
-
+using StackExchange.Redis;
 namespace Infrastructure
 {
     public static class ConfigureServices
@@ -18,6 +18,7 @@ namespace Infrastructure
             });
 
             services.AddScoped<IApplicationDbContext>(service => service.GetRequiredService<ApplicationDbContext>());
+
             return services;
         }
 
