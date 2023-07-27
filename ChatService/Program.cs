@@ -17,30 +17,16 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
-builder.Services.AddUIServices();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
-Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.Console()
-                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+builder.Services.AddUIServices();
+
+
 builder.Host.UseSerilog();
-builder.Services.AddCors(cors =>
-{
-    cors.AddDefaultPolicy(p =>
-    {
-        p.WithOrigins("http://localhost:3000")
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowCredentials();
-    });
-});
 
-
-builder.Services.AddSingleton<IDictionary<string, string>>(o => new Dictionary<string,string>());
 var app = builder.Build();
 app.UseSerilogRequestLogging();
+
 app.UseRouting();
 app.UseCors();
 app.MapGet("/", () => "Hello World!");

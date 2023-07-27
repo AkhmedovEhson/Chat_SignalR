@@ -1,4 +1,5 @@
 ﻿using ChatService.Filters;
+using Serilog;
 
 namespace ChatService
 {
@@ -14,6 +15,21 @@ namespace ChatService
             });
 
 
+            services.AddCors(cors =>
+            {
+                cors.AddDefaultPolicy(p =>
+                {
+                    p.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+                });
+            });
+            Log.Logger = new LoggerConfiguration()
+                            .MinimumLevel.Debug()
+                            .WriteTo.Console()
+                            .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+                            .CreateLogger();
 
             return services;
         }
