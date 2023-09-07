@@ -8,7 +8,6 @@
 * WebSocket and SignalR WORKS more FAST than ` 30 ms ` per request 🐟
 
 
-
 ## Technologies 💻📁
 * ⌨️ .NET 6
 * 😸 ASP.NET 6
