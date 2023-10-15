@@ -5,7 +5,7 @@
 
 
 ## Performance 📰
-* WebSocket and SignalR  have been used 🐟
+* WebSocket <---->
 
 ## Technologies 💻📁
 * ⌨️ .NET 6
